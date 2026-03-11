@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Dla Mamy ❤️</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-family:Arial;
+background:linear-gradient(135deg,#ff8fb1,#ffd6e7);
+overflow:hidden;
+text-align:center;
+}
+
+#gift{
+font-size:120px;
+cursor:pointer;
+transition:0.3s;
+z-index:2;
+}
+
+#gift:hover{
+transform:scale(1.2);
+}
+
+#text{
+font-size:60px;
+color:white;
+text-shadow:0 0 15px rgba(0,0,0,0.3);
+position:relative;
+z-index:2;
+}
+
+.heart{
+position:absolute;
+color:red;
+font-size:26px;
+animation:fall linear forwards;
+z-index:1;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-100px);
+opacity:1;
+}
+100%{
+transform:translateY(100vh);
+opacity:0;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="gift" onclick="start()">🎁</div>
+
+<div id="text"></div>
+
+<audio id="song" loop>
+<source src="piosenka.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function start(){
+
+document.getElementById("gift").style.display="none"
+
+document.getElementById("song").play()
+
+setInterval(createHeart,100)
+
+let text=document.getElementById("text")
+
+text.innerHTML="Kocham Cię Mamo ❤️"
+
+setTimeout(()=>{
+
+countdown(3)
+
+},5000)
+
+}
+
+function countdown(num){
+
+let text=document.getElementById("text")
+
+if(num>0){
+text.innerHTML=num
+setTimeout(()=>countdown(num-1),1000)
+}else{
+text.innerHTML="A to dla Ciebie piosenka 🎵"
+}
+
+}
+
+function createHeart(){
+
+const heart=document.createElement("div")
+
+heart.classList.add("heart")
+
+heart.innerHTML="❤️"
+
+heart.style.left=Math.random()*100+"vw"
+
+heart.style.animationDuration=(Math.random()*2+1.5)+"s"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{
+heart.remove()
+},4000)
+
+}
+
+</script>
+
+</body>
+</html>
